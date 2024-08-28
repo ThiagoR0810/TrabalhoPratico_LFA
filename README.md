@@ -1,6 +1,6 @@
 Trabalho Prático da disciplina de Linguagens Formais e Autômatos
 
-1. Objetivo
+*1. Objetivo*
    
   O objetivo desse trabalho é permitir que os alunos apliquem os conceitos assimilados na disciplina em um trabalho prático de implementação. A ideia é desenvolver um dos algoritmos vistos na disciplina em um programa de computador.
   
