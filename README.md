@@ -13,6 +13,7 @@ Trabalho Prático da disciplina de Linguagens Formais e Autômatos
   Considere uma Máquina de Turing não-determinística M = (E,Σ,Γ,x,y,δ,i,F), tal que:
 
    • E é um conjunto finito de estados;
+   
    • Σ ⊆ Γ é o alfabeto de entrada;
    • Γ é o alfabeto da fita;
    • x é um símbolo marcador de início da fita (x ∈ Γ − Σ);
