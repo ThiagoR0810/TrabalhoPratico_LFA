@@ -12,15 +12,14 @@ Trabalho Prático da disciplina de Linguagens Formais e Autômatos
 
   Considere uma Máquina de Turing não-determinística M = (E,Σ,Γ,x,y,δ,i,F), tal que:
 
-   • E é um conjunto finito de estados;
-   
-   • Σ ⊆ Γ é o alfabeto de entrada;
-   • Γ é o alfabeto da fita;
-   • x é um símbolo marcador de início da fita (x ∈ Γ − Σ);
-   • y é um símbolo de células vazias da fita (y ∈ Γ − Σ, y ≠ x);
-   • δ: E × Γ → P(E × Γ × {<,>}) é a função de transição;
-   • i é o estado inicial;
-   • F é o conjunto de estados finais.
+   * E é um conjunto finito de estados;
+   * Σ ⊆ Γ é o alfabeto de entrada;
+   * Γ é o alfabeto da fita;
+   * x é um símbolo marcador de início da fita (x ∈ Γ − Σ);
+   * y é um símbolo de células vazias da fita (y ∈ Γ − Σ, y ≠ x);
+   * δ: E × Γ → P(E × Γ × {<,>}) é a função de transição;
+   * i é o estado inicial;
+   * F é o conjunto de estados finais.
   
   Essa máquina pode ser expressa em formato JSON conforme a seguir, onde símbolos do alfabeto da fita são formados por exatamente um caractere, enquanto nomes de estados podem ser formados por um ou mais caracteres.
 
