@@ -1,24 +1,29 @@
 Trabalho Prático da disciplina de Linguagens Formais e Autômatos
 
 1. Objetivo
+   
   O objetivo desse trabalho é permitir que os alunos apliquem os conceitos
   assimilados na disciplina em um trabalho prático de implementação. A ideia é
   desenvolver um dos algoritmos vistos na disciplina em um programa de
   computador.
+  
 2. Descrição
+
   Implementar um programa de computador que receba uma especificação
   de uma Máquina de Turing (MT) não-determinística e uma palavra de entrada e
   verifique se essa palavra pertence ou não a linguagem descrita por essa máquina.
+  
 3. Instruções
+
   Considere uma Máquina de Turing não-determinística M = (E,Σ,Γ,x,y,δ,i,F), tal que:
-  • E é um conjunto finito de estados;
-  • Σ ⊆ Γ é o alfabeto de entrada;
-  • Γ é o alfabeto da fita;
-  • x é um símbolo marcador de início da fita (x ∈ Γ − Σ);
-  • y é um símbolo de células vazias da fita (y ∈ Γ − Σ, y ≠ x);
-  • δ: E × Γ → P(E × Γ × {<,>}) é a função de transição;
-  • i é o estado inicial;
-  • F é o conjunto de estados finais.
+    • E é um conjunto finito de estados;
+    • Σ ⊆ Γ é o alfabeto de entrada;
+    • Γ é o alfabeto da fita;
+    • x é um símbolo marcador de início da fita (x ∈ Γ − Σ);
+    • y é um símbolo de células vazias da fita (y ∈ Γ − Σ, y ≠ x);
+    • δ: E × Γ → P(E × Γ × {<,>}) é a função de transição;
+    • i é o estado inicial;
+    • F é o conjunto de estados finais.
   Essa máquina pode ser expressa em formato JSON conforme a seguir,
   onde símbolos do alfabeto da fita são formados por exatamente um caractere,
   enquanto nomes de estados podem ser formados por um ou mais caracteres.
