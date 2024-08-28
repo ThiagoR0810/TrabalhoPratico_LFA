@@ -2,21 +2,16 @@ Trabalho Prático da disciplina de Linguagens Formais e Autômatos
 
 1. Objetivo
    
-  O objetivo desse trabalho é permitir que os alunos apliquem os conceitos
-  assimilados na disciplina em um trabalho prático de implementação. A ideia é
-  desenvolver um dos algoritmos vistos na disciplina em um programa de
-  computador.
+  O objetivo desse trabalho é permitir que os alunos apliquem os conceitos assimilados na disciplina em um trabalho prático de implementação. A ideia é desenvolver um dos algoritmos vistos na disciplina em um programa de computador.
   
 2. Descrição
 
-  Implementar um programa de computador que receba uma especificação
-  de uma Máquina de Turing (MT) não-determinística e uma palavra de entrada e
-  verifique se essa palavra pertence ou não a linguagem descrita por essa máquina.
+  Implementar um programa de computador que receba uma especificação de uma Máquina de Turing (MT) não-determinística e uma palavra de entrada e verifique se essa palavra pertence ou não a linguagem descrita por essa máquina.
   
 3. Instruções
 
   Considere uma Máquina de Turing não-determinística M = (E,Σ,Γ,x,y,δ,i,F), tal que:
-    • E é um conjunto finito de estados;
+  * E é um conjunto finito de estados;
     • Σ ⊆ Γ é o alfabeto de entrada;
     • Γ é o alfabeto da fita;
     • x é um símbolo marcador de início da fita (x ∈ Γ − Σ);
