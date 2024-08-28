@@ -1,70 +1,85 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import sys
 import json
+import sys
 from collections import deque
 
-def carregar_maquina_turing():
-    # Lê o arquivo .json e atribui ele a variável "mt_data". Essa variável se torna um dicionário.
-    with open(sys.argv[1]) as file:
-        mt_data = json.load(file)
-        return mt_data["mt"]
+def load_tm(filename):
+    with open(filename, 'r') as file:
+        data = json.load(file)['mt']
+        tm = {
+            'states': set(data[0]),
+            'input_alphabet': set(data[1]),
+            'tape_alphabet': set(data[2]),
+            'start_marker': data[3],
+            'blank_symbol': data[4],
+            'transitions': {},
+            'initial_state': data[6],
+            'final_states': set(data[7])
+        }
+        for trans in data[5]:
+            state, read, next_state, write, move = trans
+            if (state, read) not in tm['transitions']:
+                tm['transitions'][(state, read)] = []
+            tm['transitions'][(state, read)].append((next_state, write, move))
+    return tm
 
-def interpretar_maquina_turing(mt, palavra_entrada):
-    # Separa o dicionário nas partes que queremos.
-    conj_estados = mt[0]
-    alfabeto_entrada = mt[1]
-    alfabeto_fita = mt[2]
-    simbolo_inicio_fita = mt[3]
-    simbolo_celula_vazia = mt[4]
-    conj_transicoes = mt[5]
-    estado_inicial = mt[6]
-    conj_estados_finais = mt[7]
-
-    # Inicializa a fita
-    fita = list(simbolo_inicio_fita + palavra_entrada + simbolo_celula_vazia * (len(palavra_entrada) + 1))
+def tm_accepts(tm, word):
+    # Constrói a fita inicial com a palavra de entrada
+    tape = list(tm['start_marker'] + word + tm['blank_symbol'] * 1000)
+    initial_config = (tm['initial_state'], 1, {})  # (estado, posição do cabeçote, mudanças na fita)
     
-    # Prints de teste
-    # print("Palavra de entrada: ", palavra_entrada, "; Tamanho da palavra de entrada: ", len(palavra_entrada), "; Primeira letra: ", palavra_entrada[0])
-    # print("Conjunto de estados: ", conj_estados)
-    # print("Alfabeto de entrada: ", alfabeto_entrada)
-    # print("Alfabeto da fita: ", alfabeto_fita)
-    # print("Simbolo marcador de inicio da fita: ", simbolo_inicio_fita)
-    # print("Simbolo de celulas vazias da fita: ", simbolo_celula_vazia)
-    # print("Funcao de transicao", conj_transicoes, "; Número de funcoes: ", len(conj_transicoes))
-    # print("Estado inicial: ", estado_inicial)
-    # print("Conjunto de estados finais: ", conj_estados_finais)
-    # print(fita)
+    # Utilizando BFS para explorar todas as transições possíveis
+    queue = deque([initial_config])
     
-    return simular_maquina_turing(estado_inicial, fita, 1, conj_transicoes, conj_estados_finais, simbolo_celula_vazia)
+    while queue:
+        state, head_pos, tape_changes = queue.popleft()
 
-def simular_maquina_turing(estado_atual, fita, posicao_cabecote, conj_transicoes, conj_estados_finais, simbolo_celula_vazia):
-    if estado_atual in conj_estados_finais:
-        return True
+        # Aplica as mudanças na fita atual
+        for pos, symbol in tape_changes.items():
+            tape[pos] = symbol
+
+        if state in tm['final_states']:
+            return True
+        
+        current_symbol = tape[head_pos]
+
+        for next_state, write_symbol, move_direction in tm['transitions'].get((state, current_symbol), []):
+            # Cria um novo dicionário de mudanças
+            new_tape_changes = tape_changes.copy()
+            new_tape_changes[head_pos] = write_symbol
+
+            # Calcula a nova posição do cabeçote
+            new_head_pos = head_pos + (1 if move_direction == '>' else -1)
+            
+            # Expande a fita, se necessário
+            if new_head_pos < 0:
+                tape.insert(0, tm['blank_symbol'])
+                new_tape_changes = {k + 1: v for k, v in new_tape_changes.items()}
+                new_head_pos = 0
+            elif new_head_pos >= len(tape):
+                tape.append(tm['blank_symbol'])
+
+            # Adiciona a nova configuração na fila
+            queue.append((next_state, new_head_pos, new_tape_changes))
     
-    for transicao in conj_transicoes:
-        if estado_atual == transicao[0] and fita[posicao_cabecote] == transicao[1]:
-            print("Transição: ", transicao)
-            print("Posição cabeçote: ", posicao_cabecote)
-            print("Célula atual: ", fita[posicao_cabecote])
-            estado_novo = transicao[2]
-            fita[posicao_cabecote] = transicao[3]
-            if transicao[4] == ">":
-                posicao_cabecote = posicao_cabecote + 1
-            elif transicao[4] == "<":
-                posicao_cabecote = posicao_cabecote - 1
-            simular_maquina_turing(estado_novo, fita, posicao_cabecote, conj_transicoes, conj_estados_finais, simbolo_celula_vazia)
-
     return False
 
-# Lê a palavra de entrada e a atribui à variável "palavra_entrada".
-palavra_entrada = sys.argv[2]
+def main():
+    if len(sys.argv) != 3:
+        print("Usar: ./mt [MT] [Palavra]")
+        return
 
-mt = carregar_maquina_turing()
-resultado = interpretar_maquina_turing(mt, palavra_entrada)
+    tm_filename = sys.argv[1]
+    word = sys.argv[2]
 
-if resultado:
-    print("Sim")
-else:
-    print("Não")
+    tm = load_tm(tm_filename)
+    
+    if tm_accepts(tm, word):
+        print("Sim")
+    else:
+        print("Não")
+
+if __name__ == "__main__":
+    main()
