@@ -37,7 +37,7 @@ Trabalho Prático da disciplina de Linguagens Formais e Autômatos
       ]}
    
   Considere o exemplo a seguir de uma Máquina de Turing não-determinística que reconhece a linguagem L = b*ab* + c*ac*. O diagrama dessa máquina pode ser vista a seguir à esquerda e seu respectivo formato em JSON à direita. Nessa conversão foram escolhidos os símbolos [ (abre colchetes) e _ (underline) para expressar o início de fita e branco respectivamente. Porém, quaisquer outros dois símbolos poderiam ter sido utilizados, dadas as restrições da definição acima.
-  • Exemplo:
+  * Exemplo:
 
       { "mt": [
         ["e1", "e2", "e3", "e4", "e5", "e6"],
