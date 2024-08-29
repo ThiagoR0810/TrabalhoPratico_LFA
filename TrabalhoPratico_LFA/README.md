@@ -145,7 +145,7 @@ if __name__ == "__main__":
 - **Objetivo**: Função principal que lê os argumentos da linha de comando, carrega a Máquina de Turing e verifica se a palavra é aceita.
 - **Validação de Argumentos**: Garante que o número correto de argumentos seja passado.
 - **Carregamento da Máquina de Turing**: Chama `load_tm` para carregar a máquina de Turing a partir do arquivo JSON.
-- **Verificação da Palavra**: Usa `tm_accepts` para verificar se a palavra é aceita e imprime "Sim" ou "Não" conforme o resultado.
+- **Verificação da Palavra**: Usa `tm_simulation` para verificar se a palavra é aceita e imprime "Sim" ou "Não" conforme o resultado.
 
 ## Compilação e Execução
 
