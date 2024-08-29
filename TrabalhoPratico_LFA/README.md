@@ -142,7 +142,7 @@ Onde `mt.json` é o arquivo JSON com a especificação da máquina e `"palavra"`
 $ python3 mt.py mt.json "bbabbbb"
 Sim
 
-$ python3 mt.py mt.json "a"
+$ python3 mt.py mt.json ""
 Não
 ```
 
