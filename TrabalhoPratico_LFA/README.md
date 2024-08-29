@@ -61,12 +61,14 @@ def load_tm(filename):
 - **Estrutura da Máquina de Turing**: A máquina é armazenada no dicionário `tm` com estados, alfabetos, transições, estado inicial e estados finais.
 - **Processamento das Transições**: Cada transição é armazenada em um dicionário de forma que, para cada combinação de estado e símbolo lido, há uma lista de possíveis transições.
 
-### Função `tm_accepts`
+### Função `tm_simulation`
 
 ```python
 def tm_accepts(tm, word):
     # Constrói a fita inicial com a palavra de entrada
     tape = list(tm['start_marker'] + word + tm['blank_symbol'] * 1000)
+    # print(tape)
+
     initial_config = (tm['initial_state'], 1, {})  # (estado, posição do cabeçote, mudanças na fita)
     
     # Utilizando BFS para explorar todas as transições possíveis
@@ -117,6 +119,7 @@ def tm_accepts(tm, word):
 
 ```python
 def main():
+    # Verifica se foi utilizado o formato certo de entrada
     if len(sys.argv) != 3:
         print("Usar: ./mt [MT] [Palavra]")
         return
@@ -130,7 +133,7 @@ def main():
 
     tm = load_tm(tm_filename)
     
-    if tm_accepts(tm, word):
+    if tm_simulation(tm, word):
         print("Sim")
     else:
         print("Não")
@@ -170,7 +173,7 @@ Não
 
 ## Observações
 
-- O programa utiliza uma abordagem BFS para explorar todas as transições possíveis, garantindo que todas as configurações válidas sejam consideradas.
+- O programa utiliza uma abordagem busca em largua (BFS) para explorar todas as transições possíveis, garantindo que todas as configurações válidas sejam consideradas.
 - A fita é implementada como uma lista, permitindo simular uma fita virtualmente infinita.
 
 
