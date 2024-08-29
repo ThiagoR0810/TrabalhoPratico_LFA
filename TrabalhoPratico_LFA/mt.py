@@ -36,14 +36,14 @@ def load_tm(filename):
         
     return tm
 
-def tm_accepts(tm, word):
+def tm_simulation(tm, word):
     # Constrói a fita inicial com a palavra de entrada
     tape = list(tm['start_marker'] + word + tm['blank_symbol'] * 1000)
     # print(tape)  
     
     initial_config = (tm['initial_state'], 1, {})  # (estado, posição do cabeçote, mudanças na fita)
     
-    # Utilizando BFS para explorar todas as transições possíveis
+    # Utilizando busca em largura (BFS) para explorar todas as transições possíveis
     queue = deque([initial_config])
     
     while queue:
@@ -80,6 +80,7 @@ def tm_accepts(tm, word):
     return False
 
 def main():
+    # Verifica se foi utilizado o formato certo de entrada
     if len(sys.argv) != 3:
         print("Usar: ./mt [MT] [Palavra]")
         return
@@ -93,7 +94,7 @@ def main():
 
     tm = load_tm(tm_filename)
     
-    if tm_accepts(tm, word):
+    if tm_simulation(tm, word):
         print("Sim")
     else:
         print("Não")
