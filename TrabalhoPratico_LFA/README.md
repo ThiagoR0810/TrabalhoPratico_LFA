@@ -3,6 +3,11 @@
 
 Este projeto implementa uma simulação de uma Máquina de Turing (MT) não-determinística usando uma única fita. O programa recebe a especificação de uma MT em formato JSON e uma palavra de entrada, e verifica se a palavra pertence à linguagem descrita pela máquina.
 
+## Autores
+
+- **Ana Clara Cunha Lopes**
+- **Thiago Ribeiro Corrêa**
+
 ## Estrutura do Código
 
 ### Importações e Funções Auxiliares
@@ -139,7 +144,9 @@ if __name__ == "__main__":
 - **Carregamento da Máquina de Turing**: Chama `load_tm` para carregar a máquina de Turing a partir do arquivo JSON.
 - **Verificação da Palavra**: Usa `tm_accepts` para verificar se a palavra é aceita e imprime "Sim" ou "Não" conforme o resultado.
 
-## Como Executar
+## Compilação e Execução
+
+Este programa é escrito em Python, portanto, não é necessário compilar o código. Para executar o programa, basta seguir os passos abaixo:
 
 1. Certifique-se de que o Python está instalado.
 2. Prepare um arquivo JSON contendo a especificação da Máquina de Turing.
