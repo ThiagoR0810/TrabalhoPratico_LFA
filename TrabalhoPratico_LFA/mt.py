@@ -9,7 +9,7 @@ def load_tm(filename):
     with open(filename, 'r') as file:
         data = json.load(file)['mt']
         tm = {
-            'states': set(data[0]),
+            'states': data[0],
             'input_alphabet': set(data[1]),
             'tape_alphabet': set(data[2]),
             'start_marker': data[3],
@@ -23,11 +23,24 @@ def load_tm(filename):
             if (state, read) not in tm['transitions']:
                 tm['transitions'][(state, read)] = []
             tm['transitions'][(state, read)].append((next_state, write, move))
+            
+        # Prints de teste
+        # print("Conjunto de estados: ", tm['states'])
+        # print("Alfabeto de entrada: ", tm['input_alphabet'])
+        # print("Alfabeto da fita: ", tm['tape_alphabet'])
+        # print("Simbolo marcador de inicio da fita: ", tm['start_marker'])
+        # print("Simbolo de celulas vazias da fita: ", tm['blank_symbol'])
+        # print("Funcao de transicao", tm['transitions'], "; Número de funcoes: ", len(tm['transitions']))
+        # print("Estado inicial: ", tm['initial_state'])
+        # print("Conjunto de estados finais: ", tm['final_states'])
+        
     return tm
 
 def tm_accepts(tm, word):
     # Constrói a fita inicial com a palavra de entrada
     tape = list(tm['start_marker'] + word + tm['blank_symbol'] * 1000)
+    # print(tape)  
+    
     initial_config = (tm['initial_state'], 1, {})  # (estado, posição do cabeçote, mudanças na fita)
     
     # Utilizando BFS para explorar todas as transições possíveis
@@ -73,6 +86,10 @@ def main():
 
     tm_filename = sys.argv[1]
     word = sys.argv[2]
+    
+    # Prints de teste
+    # print("Palavra de entrada: ", word)
+    # print("Arquivo .json de entrada: ", tm_filename)
 
     tm = load_tm(tm_filename)
     
